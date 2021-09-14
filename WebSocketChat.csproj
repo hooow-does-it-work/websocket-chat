@@ -7,7 +7,7 @@
     <ProjectGuid>{7E9F6105-6E9F-44A1-83CD-2EAD147EA24F}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <RootNamespace>WebSocketChat</RootNamespace>
-    <AssemblyName>WebSocketChat</AssemblyName>
+    <AssemblyName>chat</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>

@@ -1,6 +1,6 @@
 /obj
 /bin/Debug
-/bin/Release/WebSocketChat.exe
-/bin/Release/WebSocketChat.pdb
+/bin/Release/chat.exe
+/bin/Release/chat.pdb
 /bin/Release/IocpSharp.dll
 /bin/Release/IocpSharp.pdb
