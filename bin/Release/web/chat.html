@@ -7,97 +7,27 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
   <meta name="renderer" content="webkit">
-  <style type="text/css">
-    .red { color: red }
-    .green { color: green }
-    .gray { color: gray  }
-    .gray-333 { color: #333 }
-    .gray-666 { color: #666 }
-    .gray-999 { color: #999 }
-  </style>
-  <!--刚好前面我们HTTP测试的时候保留了个vue.js，用起来-->
-  <script src="/vue.js"></script>
+  <link href="/resources/atom.css" rel="stylesheet" type="text/css" />
+  <link href="/resources/chat.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
-  <div id="app">
-    <button v-if="status === 0" @click="connect">连接</button>
-    <button v-else-if="status=== 1">连接中...</button>
-    <div v-else>
-      <textarea cols="80" rows="5" v-model="message"></textarea><br />
-      <button @click="sendMessage">文本模式发送</button>
-      <button @click="sendMessageBinary">二进制模式发送</button>
-      <button @click="disconnect">断开连接</button>
-    </div>
-
-    <div style="font-size: 12px;">
-      <div v-for="message in messages" :class="message.className">{{message.text}}</div>
+  <div class="wrapper">
+    <div id="app">
+      <div class="login" v-if="loginStatus === 0">
+        <p><input type="text" v-model="name" placeholder="请输入名称登录" /></p>
+        <p><input type="button" value="登录" @click="login" /></p>
+      </div>
+      <div v-else>
+        <textarea cols="80" rows="5" v-model="message"></textarea><br />
+        <button @click="post">发送</button>
+        <button @click="quit">退出</button>
+      </div>
     </div>
   </div>
-  <script>
-    new Vue({
-      el: '#app',
-      data() {
-        return {
-          messages: [],
-          status: 0,
-          socket: null,
-          message: '{"action":"login", "payload": {"name":"anlige"}}',
-          url: 'ws://127.0.0.1:4189/'
-        }
-      },
-      created() { },
-      methods: {
-        appendMessage(text, className) {
-          className = className || '';
-          this.messages.unshift({ text, className });
-        },
-        disconnect() {
-          this.socket.close();
-        },
-        sendMessage() {
-          if (!this.message) return;
-          this.appendMessage("> " + this.message, 'gray-999');
-          this.socket.send(this.message);
-        },
-        sendMessageBinary() {
-          if (!this.message) return;
-          this.appendMessage("> " + this.message, 'gray-999');
-          this.socket.send(new Blob([this.message]));
-        },
-        connect() {
-          if (this.status !== 0) {
-            return;
-          }
-          const that = this;
-          this.messages = [];
-          this.status = 1;
-
-          const webSocket = new WebSocket(this.url);
-          webSocket.onopen = function () {
-            that.appendMessage('connection opened', 'green');
-            that.status = 2
-            that.socket = webSocket;
-          }
-
-          webSocket.onmessage = function (message) {
-            that.appendMessage("< " + message.data, 'gray-333');
-          };
-
-
-          webSocket.onclose = function (ev) {
-            that.appendMessage(`connection closed, code: ${ev.code}, reason: ${ev.reason}`, 'red');
-            that.status = 0;
-          }
-
-          webSocket.onerror = function (ex) {
-            that.appendMessage(ex.message, 'red');
-            that.status = 0;
-          }
-        }
-      }
-    });
-  </script>
+  <script src="/resources/vue.js"></script>
+  <script src="/resources/connection.js"></script>
+  <script src="/resources/bootstrap.js"></script>
 </body>
 
 </html>
