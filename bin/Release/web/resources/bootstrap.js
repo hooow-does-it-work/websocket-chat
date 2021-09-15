@@ -5,10 +5,11 @@ new Vue({
       url: 'ws://127.0.0.1:4189/',
       me: null,
       loginHandler: null,
-      name: null,
+      name: 'anlige',
       connection: null,
       loginStatus: 0,
-      message: ''
+      message: '',
+      messages: []
     }
   },
   created () {
@@ -22,12 +23,12 @@ new Vue({
       this.loginStatus = 2;
     }, this);
 
-    conn.on('@enter', (payload) => console.log('用户进入聊天', payload));
-    conn.on('@exit', (payload) => console.log('用户退出聊天', payload));
+    conn.on('@enter', (payload) => this.messages.push({type: 'log', message: `${payload.name} 进入聊天室。`}), this);
+    conn.on('@exit', (payload) => this.messages.push({type: 'log', message: `${payload.name} 退出聊天室。`}), this);
 
-    conn.on('@post', (payload) => {
-      console.log('新消息', payload)
-    })
+    conn.on('@post', (payload) =>this.messages.push({type: 'post', payload}), this)
+
+    this.login()
   },
   methods: {
     login () {

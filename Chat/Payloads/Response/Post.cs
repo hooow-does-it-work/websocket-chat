@@ -11,5 +11,6 @@ namespace WebSocketChat.Chat.Payloads.Response
     {
         public int connectionId { get; set; }
         public string message { get; set; }
+        public string name { get; set; }
     }
 }

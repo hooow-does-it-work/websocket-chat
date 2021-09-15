@@ -10,5 +10,6 @@ namespace WebSocketChat.Chat.Payloads.Response
     class Exit : IPayload
     {
         public int connectionId { get; set; }
+        public string name { get; set; }
     }
 }

@@ -19,11 +19,15 @@
         <p><input type="button" value="登录" @click="login" :disabled="loginStatus !== 0" /></p>
       </div>
       <div v-else>
-        <div class="clearfix">
-          <div class="fl contents"></div>
-          <div class="fr logs"></div>
+        <div class="wrapper-contents">
+          <div class="contents">
+            <div v-for="(msg, index) in messages" :key="index" :class="'message-type-' + msg.type">
+              <span v-if="msg.type === 'log'">{{msg.message}}</span>
+              <div v-else-if="msg.type === 'post'">{{msg.payload.name}}: {{msg.payload.message}}</div>
+            </div>
+          </div>
         </div>
-        <div>
+        <div class="inputs">
           <input v-model="message" /> <button @click="post">发送</button> <button @click="quit">退出</button>
         </div>
       </div>

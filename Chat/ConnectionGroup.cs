@@ -65,7 +65,7 @@ namespace WebSocketChat.Chat
             _connections.TryRemove(connection.Id, out _);
 
             //广播给其他用户
-            Broadcast(new Payloads.Response.Exit() { connectionId = connection.Id }, connection.Id);
+            Broadcast(new Payloads.Response.Exit() { connectionId = connection.Id, name = connection.Name }, connection.Id);
         }
 
         /// <summary>

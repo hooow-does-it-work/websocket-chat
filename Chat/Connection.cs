@@ -105,7 +105,7 @@ namespace WebSocketChat.Chat
             //发布
             if (payload_ is Post post)
             {
-                _group.Broadcast(new Payloads.Response.Post() { connectionId = _connectionId, message = post.message }, _connectionId);
+                _group.Broadcast(new Payloads.Response.Post() { connectionId = _connectionId, message = post.message, name = _name }, _connectionId);
                 return;
             }
 
