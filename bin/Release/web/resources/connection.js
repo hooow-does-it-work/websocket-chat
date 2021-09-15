@@ -27,10 +27,22 @@ connection.prototype.send = function (action, payload) {
   if (this.status !== 2) return;
   this.socket.send(JSON.stringify({ action, payload }));
 }
+
 connection.prototype.quit = function () {
   if (this.status !== 2) return;
   this.socket.send(JSON.stringify({ action: 'quit', payload: {} }));
 }
+
+connection.prototype.login = function (name) {
+  if (this.status !== 2) {
+    this.once('wait-connected', () => this.send('login', { name: name }));
+    if (this.status === 0) this.connect();
+    return;
+  }
+  this.send('login', { name: name });
+};
+
+
 // 连接
 connection.prototype.connect = function () {
   this.status = 1;
@@ -41,6 +53,7 @@ connection.prototype.connect = function () {
     that.status = 2
     that.connectFailedCount = 0;
     that.emit('connected');
+    that.emit('wait-connected');
   }
 
   webSocket.onmessage = function (ev) {

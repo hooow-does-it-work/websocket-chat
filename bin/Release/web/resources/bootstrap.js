@@ -13,6 +13,7 @@ new Vue({
   },
   created () {
     this.connection = new connection(this.url);
+
     this.connection.on('@login', function (payload) {
       this.me = { name: this.name, id: payload.connectionId }
       this.loginStatus = 1;
@@ -23,20 +24,7 @@ new Vue({
   },
   methods: {
     login () {
-      if (this.connection.status !== 1) {
-        this.connection.on('connected', function () {
-          this.sendLogin()
-        }, this);
-
-        if (this.connection.status == 0) {
-          this.connection.connect()
-        }
-        return;
-      }
-      this.sendLogin()
-    },
-    sendLogin () {
-      this.connection.send('login', { name: this.name });
+      this.connection.login(this.name);
     },
     post () {
       this.connection.send('post', { message: this.message });
