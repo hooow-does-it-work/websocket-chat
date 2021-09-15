@@ -23,8 +23,8 @@ new Vue({
       this.loginStatus = 2;
     }, this);
 
-    conn.on('@enter', (payload) => this.messages.push({type: 'log', message: `${payload.name} 进入聊天室。`}), this);
-    conn.on('@exit', (payload) => this.messages.push({type: 'log', message: `${payload.name} 退出聊天室。`}), this);
+    conn.on('@enter', (payload) => this.messages.push({type: 'log', message: `${payload.name} 进入聊天室`}), this);
+    conn.on('@exit', (payload) => this.messages.push({type: 'log', message: `${payload.name} 退出聊天室`}), this);
 
     conn.on('@post', (payload) =>this.messages.push({type: 'post', payload}), this)
 

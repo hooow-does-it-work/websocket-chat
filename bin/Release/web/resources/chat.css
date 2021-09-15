@@ -1,9 +1,10 @@
-.wrapper { width: 960px; margin: 100px auto 0; border: 1px #ddd solid; box-shadow: 0 0 20px 0 #eee; padding: 10px; height: 480px; position: relative; background-color: #fff;}
+.wrapper { width: 600px; margin: 100px auto 0; border: 1px #ddd solid; box-shadow: 0 0 20px 0 #eee; padding: 10px; position: relative; background-color: #fff;}
 
 .login {width: 200px; margin: auto; margin-top: 100px; text-align: center; }
 
-.wrapper-contents {height: 400px; width: 100%;}
-.wrapper-contents .contents {width: 100%; height: 400px; overflow-y: scroll;}
-.wrapper-contents .contents .message-type-log { text-align: center;color: #aaa;}
+.wrapper-contents .contents {width: 100%; height: 300px; overflow-y: scroll;}
+.wrapper-contents .contents > div {margin-bottom: 3px;}
+.wrapper-contents .contents .message-type-log { text-align: center;color: #aaa; font-size: 12px; padding-bottom: 3px;}
+.wrapper-contents .contents .message-type-log span {border-radius: 3px; background-color: #efefef; padding: 2px 5px;}
 
-.inputs {margin-top: 10px; height: 50px;} 
+.inputs {margin-top: 10px; height: 50px; border-top: 1px #ddd solid; padding-top: 10px;} 
