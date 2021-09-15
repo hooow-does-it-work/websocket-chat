@@ -1,15 +1,16 @@
 function connection (wsUrl) {
   this.wsUrl = wsUrl;
   this.socket = null;
-  this.autoReconnect = true;
   this.status = 0;
-  this.connectFailedCount = 0;
   this.__events = {};
 }
 
 // 简单的事件注册。
-connection.prototype.on = function (ev, handler, once, context) {
-  this.__events[ev] = { handler, once: once === true, context: context || null };
+connection.prototype.on = function (ev, handler, context) {
+  this.__events[ev] = { handler, once: false, context: context || null };
+}
+connection.prototype.once = function (ev, handler, context) {
+  this.__events[ev] = { handler, once: true, context: context || null };
 }
 
 // 调用事件
@@ -21,11 +22,6 @@ connection.prototype.emit = function (ev, ...args) {
     this.__events[ev] = null;
   }
 };
-
-connection.prototype.reconnect = function () {
-  if (this.status !== 0 || this.connectFailedCount >= 10) return;
-  setTimeout(() => this.connect(), 1500);
-}
 
 connection.prototype.send = function (action, payload) {
   if (this.status !== 2) return;
@@ -61,12 +57,10 @@ connection.prototype.connect = function () {
   webSocket.onclose = function (ev) {
     that.status = 0;
     that.emit('close', ev);
-    if (that.autoReconnect) that.reconnect();
   }
 
   webSocket.onerror = function () {
     that.status = 0;
     that.emit('error', ex);
-    if (that.autoReconnect) that.reconnect();
   }
 }

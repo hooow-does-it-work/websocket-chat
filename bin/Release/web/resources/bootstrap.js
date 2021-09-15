@@ -16,16 +16,17 @@ new Vue({
     this.connection.on('@login', function (payload) {
       this.me = { name: this.name, id: payload.connectionId }
       this.loginStatus = 1;
-      console.log('login succeed', this.me)
-    }, false, this);
+    }, this);
+
+    this.connection.on('close', () => this.loginStatus = 0);
+    this.connection.on('error', () => this.loginStatus = 0);
   },
   methods: {
     login () {
       if (this.connection.status !== 1) {
-
         this.connection.on('connected', function () {
           this.sendLogin()
-        }, true, this);
+        }, this);
 
         if (this.connection.status == 0) {
           this.connection.connect()
