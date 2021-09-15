@@ -19,9 +19,13 @@
         <p><input type="button" value="登录" @click="login" :disabled="loginStatus !== 0" /></p>
       </div>
       <div v-else>
-        <textarea cols="80" rows="5" v-model="message"></textarea><br />
-        <button @click="post">发送</button>
-        <button @click="quit">退出</button>
+        <div class="clearfix">
+          <div class="fl contents"></div>
+          <div class="fr logs"></div>
+        </div>
+        <div>
+          <input v-model="message" /> <button @click="post">发送</button> <button @click="quit">退出</button>
+        </div>
       </div>
     </div>
   </div>
