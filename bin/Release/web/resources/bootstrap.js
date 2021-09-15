@@ -12,16 +12,22 @@ new Vue({
     }
   },
   created () {
-    this.connection = new connection(this.url);
+    const conn = this.connection = new connection(this.url);
+    conn.on('connecting', () => this.loginStatus = 1);
+    conn.on('close', () => this.loginStatus = 0);
+    conn.on('error', () => this.loginStatus = 0);
 
-    this.connection.on('@login', function (payload) {
+    conn.on('@login', function (payload) {
       this.me = { name: this.name, id: payload.connectionId }
       this.loginStatus = 2;
     }, this);
 
-    this.connection.on('connecting', () => this.loginStatus = 1);
-    this.connection.on('close', () => this.loginStatus = 0);
-    this.connection.on('error', () => this.loginStatus = 0);
+    conn.on('@enter', (payload) => console.log('用户进入聊天', payload));
+    conn.on('@exit', (payload) => console.log('用户退出聊天', payload));
+
+    conn.on('@post', (payload) => {
+      console.log('新消息', payload)
+    })
   },
   methods: {
     login () {
