@@ -13,18 +13,20 @@ using IocpSharp.Http.Utils;
 using IocpSharp.WebSocket;
 using IocpSharp.WebSocket.Frames;
 using System.Net;
+using IocpSharp.Http;
 
-namespace IocpSharp.Http
+namespace WebSocketChat.Chat
 {
-    /// <summary>
-    /// 静态文件服务，通过WebRoot设置根目录
-    /// </summary>
-    public class StaticHttpServer : HttpServerBase
+    public class Server : HttpServerBase
     {
-        public StaticHttpServer() : base()
+        public Server() : base()
         {
             //设置根目录
             WebRoot = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "web"));
+        }
+        protected override Messager GetMessager(HttpRequest request, Stream stream)
+        {
+            return new Connection(stream);
         }
     }
 }

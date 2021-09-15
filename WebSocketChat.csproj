@@ -44,7 +44,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Chat\StaticHttpServer.cs" />
+    <Compile Include="Chat\Connection.cs" />
+    <Compile Include="Chat\ConnectionGroup.cs" />
+    <Compile Include="Chat\Payloads\ResponseActionAttribute.cs" />
+    <Compile Include="Chat\Payloads\RequestActionAttribute.cs" />
+    <Compile Include="Chat\Payloads\IPayload.cs" />
+    <Compile Include="Chat\Payloads\Payload.cs" />
+    <Compile Include="Chat\Payloads\Request\Post.cs" />
+    <Compile Include="Chat\Payloads\Request\Quit.cs" />
+    <Compile Include="Chat\Payloads\Request\Users.cs" />
+    <Compile Include="Chat\Payloads\Request\Login.cs" />
+    <Compile Include="Chat\Payloads\Response\Error.cs" />
+    <Compile Include="Chat\Payloads\Response\Post.cs" />
+    <Compile Include="Chat\Payloads\Response\Exit.cs" />
+    <Compile Include="Chat\Payloads\Response\Enter.cs" />
+    <Compile Include="Chat\Payloads\Response\Login.cs" />
     <Compile Include="System.Web\HttpUtility.cs" />
     <Compile Include="System.Web\Resources\AtlasWeb.cs" />
     <Compile Include="System.Web\SecurityUtils.cs" />
@@ -59,7 +73,7 @@
     <Compile Include="System.Web\Util\Utf16StringValidator.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Chat\WebSocketMessager.cs" />
+    <Compile Include="Chat\Server.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\IocpSharp\IocpSharp.csproj">
@@ -67,5 +81,6 @@
       <Name>IocpSharp</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
