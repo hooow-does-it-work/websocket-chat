@@ -16,9 +16,10 @@ new Vue({
 
     this.connection.on('@login', function (payload) {
       this.me = { name: this.name, id: payload.connectionId }
-      this.loginStatus = 1;
+      this.loginStatus = 2;
     }, this);
 
+    this.connection.on('connecting', () => this.loginStatus = 1);
     this.connection.on('close', () => this.loginStatus = 0);
     this.connection.on('error', () => this.loginStatus = 0);
   },

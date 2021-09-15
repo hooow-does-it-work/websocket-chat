@@ -48,6 +48,7 @@ connection.prototype.connect = function () {
   this.status = 1;
   const that = this
   const webSocket = new WebSocket(this.wsUrl);
+  that.emit('connecting');
   webSocket.onopen = function () {
     that.socket = webSocket;
     that.status = 2

@@ -14,9 +14,9 @@
 <body>
   <div class="wrapper">
     <div id="app">
-      <div class="login" v-if="loginStatus === 0">
-        <p><input type="text" v-model="name" placeholder="请输入名称登录" /></p>
-        <p><input type="button" value="登录" @click="login" /></p>
+      <div class="login" v-if="loginStatus !== 2">
+        <p><input type="text" v-model="name" placeholder="请输入名称登录" :disabled="loginStatus !== 0" /></p>
+        <p><input type="button" value="登录" @click="login" :disabled="loginStatus !== 0" /></p>
       </div>
       <div v-else>
         <textarea cols="80" rows="5" v-model="message"></textarea><br />
