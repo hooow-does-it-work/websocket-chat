@@ -27,7 +27,11 @@
           </div>
         </div>
         <div class="inputs">
-          <input v-model="message" /> <button @click="post">发送</button> <button @click="quit">退出</button>
+          <input v-model="message" type="text" placeholder="输入消息发送" />
+          <div class="buttons">
+            <button @click="post">发送</button>
+            <button @click="quit">离开</button>
+          </div>
         </div>
       </div>
     </div>

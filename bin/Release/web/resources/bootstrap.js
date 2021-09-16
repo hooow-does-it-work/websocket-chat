@@ -35,14 +35,16 @@ new Vue({
       if (msg.type === 'log') return 'message-type-log';
       return [
         'message-type-' + msg.type,
-        'message-owner-' + (msg.payload.connectionId === this.me.id ? 'me' : 'user')
+        'message-owner-' + (msg.payload.connectionId === this.me.id ? 'mine' : 'user')
       ].join(' ')
     },
     login () {
       this.connection.login(this.name);
     },
     post () {
+      if (!this.message) return;
       this.connection.send('post', { message: this.message });
+      this.message = '';
     },
     quit () {
       this.connection.quit();
@@ -58,7 +60,16 @@ new Vue({
           if (this.msg.type === 'log') {
             return h('span', [this.msg.message]);
           }
-          return h('div', [this.msg.payload.name, '：', this.msg.payload.message]);
+          return [
+            h('div',
+              {
+                'class': 'message-content'
+              },
+              [
+                h('label', [this.msg.payload.name]),
+                h('div', [this.msg.payload.message])
+              ])
+          ];
         }
       }
     }
