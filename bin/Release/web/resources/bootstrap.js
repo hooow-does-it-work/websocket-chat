@@ -57,7 +57,6 @@ new Vue({
 
     conn.on('@post', (payload) => this.messages.push({ type: 'post', payload }), this)
 
-    this.login()
   },
   methods: {
     /**
