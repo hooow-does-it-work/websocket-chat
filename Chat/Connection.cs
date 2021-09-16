@@ -93,7 +93,9 @@ namespace WebSocketChat.Chat
 
                 _group = ConnectionGroup.Default;
                 //先回复自己
-                Send(new Payloads.Response.Login() { connectionId = _connectionId });
+                Send(new Payloads.Response.Login() { 
+                    connectionId = _connectionId 
+                });
 
                 //然后广播给分组内的所有人
                 _group.Enter(this);
@@ -104,7 +106,12 @@ namespace WebSocketChat.Chat
             if (payload_ is Post post)
             {
                 //广播给分组内的所有人
-                _group.Broadcast(new Payloads.Response.Post() { connectionId = _connectionId, message = post.message, name = _name });
+                _group.Broadcast(new Payloads.Response.Post()
+                {
+                    connectionId = _connectionId,
+                    message = post.message,
+                    name = _name
+                });
                 return;
             }
 

@@ -25,7 +25,7 @@ new Vue({
       url: 'ws://127.0.0.1:4189/',
       me: null,
       loginHandler: null,
-      name: 'anlige',
+      name: '',
       connection: null,
       loginStatus: 0,
       message: '',
