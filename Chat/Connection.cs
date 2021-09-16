@@ -105,7 +105,7 @@ namespace WebSocketChat.Chat
             //发布
             if (payload_ is Post post)
             {
-                _group.Broadcast(new Payloads.Response.Post() { connectionId = _connectionId, message = post.message, name = _name }, _connectionId);
+                _group.Broadcast(new Payloads.Response.Post() { connectionId = _connectionId, message = post.message, name = _name });
                 return;
             }
 
@@ -133,20 +133,18 @@ namespace WebSocketChat.Chat
                 return;
             }
 
-            ThreadPool.QueueUserWorkItem((state)=> {
-                while (_queue.TryDequeue(out IPayload next))
+            while (_queue.TryDequeue(out IPayload next))
+            {
+                try
                 {
-                    try
-                    {
-                        Send(Payload.Stringify(next));
-                    }
-                    catch (IOException)
-                    {
-                        break;
-                    }
+                    Send(Payload.Stringify(next));
                 }
-                Interlocked.CompareExchange(ref _sending, 0, 1);
-            });
+                catch
+                {
+                    break;
+                }
+            }
+            Interlocked.CompareExchange(ref _sending, 0, 1);
         }
     }
 }

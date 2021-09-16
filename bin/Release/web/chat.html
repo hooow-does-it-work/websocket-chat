@@ -21,9 +21,8 @@
       <div v-else>
         <div class="wrapper-contents">
           <div class="contents">
-            <div v-for="(msg, index) in messages" :key="index" :class="'message-type-' + msg.type">
-              <span v-if="msg.type === 'log'">{{msg.message}}</span>
-              <div v-else-if="msg.type === 'post'">{{msg.payload.name}}: {{msg.payload.message}}</div>
+            <div v-for="(msg, index) in messages" :key="index" :class="getClass(msg)">
+              <component :is="contents" :msg="msg"></component>
             </div>
           </div>
         </div>

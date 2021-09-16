@@ -23,14 +23,21 @@ new Vue({
       this.loginStatus = 2;
     }, this);
 
-    conn.on('@enter', (payload) => this.messages.push({type: 'log', message: `${payload.name} 进入聊天室`}), this);
-    conn.on('@exit', (payload) => this.messages.push({type: 'log', message: `${payload.name} 退出聊天室`}), this);
+    conn.on('@enter', (payload) => this.messages.push({ type: 'log', message: `${payload.name} 进入聊天室` }), this);
+    conn.on('@exit', (payload) => this.messages.push({ type: 'log', message: `${payload.name} 离开聊天室` }), this);
 
-    conn.on('@post', (payload) =>this.messages.push({type: 'post', payload}), this)
+    conn.on('@post', (payload) => this.messages.push({ type: 'post', payload }), this)
 
     this.login()
   },
   methods: {
+    getClass (msg) {
+      if (msg.type === 'log') return 'message-type-log';
+      return [
+        'message-type-' + msg.type,
+        'message-owner-' + (msg.payload.connectionId === this.me.id ? 'me' : 'user')
+      ].join(' ')
+    },
     login () {
       this.connection.login(this.name);
     },
@@ -39,6 +46,21 @@ new Vue({
     },
     quit () {
       this.connection.quit();
+    }
+  },
+  computed: {
+    contents () {
+      return {
+        props: {
+          msg: { type: Object, required: true }
+        },
+        render (h) {
+          if (this.msg.type === 'log') {
+            return h('span', [this.msg.message]);
+          }
+          return h('div', [this.msg.payload.name, '：', this.msg.payload.message]);
+        }
+      }
     }
   }
 });
