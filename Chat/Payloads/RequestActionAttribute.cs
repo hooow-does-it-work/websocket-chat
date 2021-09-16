@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace WebSocketChat.Chat.Payloads
 {
+    /// <summary>
+    /// 客户端请求消息属性
+    /// </summary>
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = false)]
     class RequestActionAttribute : Attribute
     {

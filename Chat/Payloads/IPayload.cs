@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace WebSocketChat.Chat.Payloads
 {
+    /// <summary>
+    /// 空接口
+    /// </summary>
     interface IPayload
-    {
-    }
+    {}
 }

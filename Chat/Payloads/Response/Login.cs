@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace WebSocketChat.Chat.Payloads.Response
 {
+    /// <summary>
+    /// 用户登录的响应消息
+    /// </summary>
     [ResponseAction("login")]
     class Login : IPayload
     {

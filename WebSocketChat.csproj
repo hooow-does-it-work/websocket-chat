@@ -52,9 +52,7 @@
     <Compile Include="Chat\Payloads\Payload.cs" />
     <Compile Include="Chat\Payloads\Request\Post.cs" />
     <Compile Include="Chat\Payloads\Request\Quit.cs" />
-    <Compile Include="Chat\Payloads\Request\Users.cs" />
     <Compile Include="Chat\Payloads\Request\Login.cs" />
-    <Compile Include="Chat\Payloads\Response\Error.cs" />
     <Compile Include="Chat\Payloads\Response\Post.cs" />
     <Compile Include="Chat\Payloads\Response\Exit.cs" />
     <Compile Include="Chat\Payloads\Response\Enter.cs" />

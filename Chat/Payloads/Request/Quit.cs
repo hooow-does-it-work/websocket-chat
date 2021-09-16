@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace WebSocketChat.Chat.Payloads.Request
 {
+    /// <summary>
+    /// 用户主动退出
+    /// </summary>
     [RequestAction("quit")]
     class Quit : IPayload
     {

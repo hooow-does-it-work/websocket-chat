@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace WebSocketChat.Chat.Payloads.Request
 {
+    /// <summary>
+    /// 用户发送聊天消息
+    /// </summary>
     [RequestAction("post")]
     class Post : IPayload
     {

@@ -46,7 +46,7 @@ namespace WebSocketChat.Chat.Payloads
         }
 
         /// <summary>
-        /// 把用户文本消息解析成具体的消息
+        /// 把客户端JSON消息解析成具体的消息类
         /// </summary>
         /// <param name="payload"></param>
         /// <returns></returns>
@@ -71,6 +71,11 @@ namespace WebSocketChat.Chat.Payloads
             }
         }
 
+        /// <summary>
+        /// 把消息类序列化成JSON字符串
+        /// </summary>
+        /// <param name="payload"></param>
+        /// <returns></returns>
         public static string Stringify(IPayload payload)
         {
             if (!_responseActions.TryGetValue(payload.GetType(), out string action))

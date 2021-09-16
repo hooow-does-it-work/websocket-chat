@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace WebSocketChat.Chat.Payloads.Response
 {
+    /// <summary>
+    /// 广播用户发送内容的响应消息
+    /// </summary>
     [ResponseAction("post")]
     class Post : IPayload
     {

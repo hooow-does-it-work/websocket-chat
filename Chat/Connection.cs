@@ -84,11 +84,7 @@ namespace WebSocketChat.Chat
         protected override void OnText(string payload)
         {
             IPayload payload_ = Payload.Parse(payload);
-            if (payload_ == null)
-            {
-                Send(new Payloads.Response.Error() { message = $"数据异常：{payload}" });
-                return;
-            }
+            if (payload_ == null) return;
 
             //登录
             if (payload_ is Login login)
@@ -98,6 +94,8 @@ namespace WebSocketChat.Chat
                 _group = ConnectionGroup.Default;
                 //先回复自己
                 Send(new Payloads.Response.Login() { connectionId = _connectionId });
+
+                //然后广播给所有人
                 _group.Enter(this);
                 return;
             }
@@ -105,6 +103,7 @@ namespace WebSocketChat.Chat
             //发布
             if (payload_ is Post post)
             {
+                //广播给所有人
                 _group.Broadcast(new Payloads.Response.Post() { connectionId = _connectionId, message = post.message, name = _name });
                 return;
             }
