@@ -24,7 +24,6 @@ new Vue({
     return {
       url: 'ws://127.0.0.1:4189/',
       me: null,
-      loginHandler: null,
       name: '',
       connection: null,
       loginStatus: 0,
@@ -48,6 +47,7 @@ new Vue({
     conn.on('error', () => this.loginStatus = 0);
 
     conn.on('@login', function (payload) {
+      this.messages = [];
       this.me = { name: this.name, id: payload.connectionId }
       this.loginStatus = 2;
     }, this);
