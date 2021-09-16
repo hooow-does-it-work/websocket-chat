@@ -20,7 +20,7 @@
       </div>
       <div v-else>
         <div class="wrapper-contents">
-          <div class="contents">
+          <div class="contents" ref="contents">
             <div v-for="(msg, index) in messages" :key="index" :class="getClass(msg)">
               <component :is="contents" :msg="msg"></component>
             </div>

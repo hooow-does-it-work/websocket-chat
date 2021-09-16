@@ -1,3 +1,13 @@
+function lazyFunction (fn, timeout) {
+  var timer = 0;
+  return function () {
+    if (timer) window.clearTimeout(timer);
+    var args = arguments, that = this;
+    timer = window.setTimeout(function () {
+      fn.apply(that, args)
+    }, timeout);
+  };
+}
 new Vue({
   el: '#app',
   data () {
@@ -10,6 +20,11 @@ new Vue({
       loginStatus: 0,
       message: '',
       messages: []
+    }
+  },
+  watch: {
+    messages () {
+      this.updateScroll();
     }
   },
   created () {
@@ -31,6 +46,13 @@ new Vue({
     this.login()
   },
   methods: {
+    updateScroll: lazyFunction(function () {
+      this.$nextTick(() => {
+        const contentsRef = this.$refs['contents']
+        console.log(contentsRef)
+        contentsRef.scrollTop = contentsRef.scrollHeight
+      });
+    }, 30),
     getClass (msg) {
       if (msg.type === 'log') return 'message-type-log';
       return [
