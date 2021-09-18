@@ -51,12 +51,9 @@ namespace WebSocketChat.Chat
         /// 实例化连接
         /// </summary>
         /// <param name="stream"></param>
-        public Connection(Stream stream) : base(stream)
+        public Connection(Stream stream, EndPoint localEndPoint, EndPoint remoteEndPoint) : base(stream)
         {
-            if (stream is IocpSharp.ISocketBasedStream socketBasedStream)
-            {
-                _remoteEndPoint = socketBasedStream.BaseSocket.RemoteEndPoint as IPEndPoint;
-            }
+            _remoteEndPoint = remoteEndPoint as IPEndPoint;
             _connectionId = ConnectionGroup.GetNewConnectionId();
         }
 
