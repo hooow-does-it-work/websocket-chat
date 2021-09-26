@@ -24,9 +24,9 @@ namespace WebSocketChat.Chat
             //设置根目录
             WebRoot = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "web"));
         }
-        protected override Messager GetMessager(HttpRequest request, Stream stream, EndPoint localEndPoint, EndPoint remoteEndPoint)
+        protected override Messager GetMessager(HttpRequest request, HttpStream baseStream)
         {
-            return new Connection(stream, localEndPoint, remoteEndPoint);
+            return new Connection(baseStream, baseStream.BaseSocket.LocalEndPoint, baseStream.BaseSocket.RemoteEndPoint);
         }
     }
 }
