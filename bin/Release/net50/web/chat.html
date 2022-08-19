@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+  <title>WebSocket聊天测试</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+  <meta name="renderer" content="webkit">
+  <link href="/resources/atom.css" rel="stylesheet" type="text/css" />
+  <link href="/resources/chat.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+  <div class="wrapper">
+    <div id="app">
+      <div class="login" v-if="loginStatus !== 2">
+        <p><input type="text" v-model="name" placeholder="请输入名称登录" :disabled="loginStatus !== 0" /></p>
+        <p><input type="button" value="登录" @click="login" :disabled="loginStatus !== 0" /></p>
+      </div>
+      <div v-else>
+        <div class="wrapper-contents">
+          <div class="contents" ref="contents">
+            <div v-for="(msg, index) in messages" :key="index" :class="getClass(msg)">
+              <component :is="contents" :msg="msg"></component>
+            </div>
+          </div>
+        </div>
+        <div class="inputs ">
+          <input v-model="message" type="text" @keyup.enter="post" placeholder="输入消息发送" />
+          <div class="buttons">
+            <button @click="post">发送</button>
+            <button @click="quit">离开</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="/resources/vue.js"></script>
+  <script src="/resources/connection.js"></script>
+  <script src="/resources/bootstrap.js"></script>
+</body>
+
+</html>

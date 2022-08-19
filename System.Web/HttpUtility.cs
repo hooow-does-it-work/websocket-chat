@@ -2,7 +2,7 @@
 {
     using Util;
 
-    internal sealed class HttpUtility
+    internal sealed class InternalHttpUtility
     {
 
         public static string JavaScriptStringEncode(string value)

@@ -7,7 +7,6 @@
     using System.Reflection;
     using System.Runtime.CompilerServices;
     using System.Text;
-    using System.Web;
     using System.Web.Resources;
     using System.Collections.Specialized;
 
@@ -283,7 +282,7 @@
         private static void SerializeString(string input, StringBuilder sb)
         {
             sb.Append('"');
-            sb.Append(HttpUtility.JavaScriptStringEncode(input));
+            sb.Append(InternalHttpUtility.JavaScriptStringEncode(input));
             sb.Append('"');
         }
 
