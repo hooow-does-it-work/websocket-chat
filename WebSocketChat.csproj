@@ -9,11 +9,11 @@
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
-		<OutputPath>.\bin\Debug</OutputPath>
+		<OutputPath>.\bin\Chat\Debug</OutputPath>
 		<DefineConstants>TRACE;DEBUG;</DefineConstants>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
-		<OutputPath>.\bin\Release</OutputPath>
+		<OutputPath>.\bin\Chat\Release</OutputPath>
 		<DefineConstants>TRACE;</DefineConstants>
 	</PropertyGroup>
 

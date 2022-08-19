@@ -11,12 +11,24 @@ namespace WebSocketChat
     {
         static void Main(string[] args)
         {
+
+#if !SVR
             StartWebSocketServer(4189);
 
             Console.ReadLine();
+#else
+            Jazor.HostingService.Startup((worker, stopToken, agvs) => {
+                var server = StartWebSocketServer(4189);
+                worker.RegisterStopHandler(stopToken, (state) =>
+                {
+                    server.Stop();
+
+                }, null);
+            });
+#endif
         }
 
-        private static void StartWebSocketServer(int port)
+        private static HttpServerBase StartWebSocketServer(int port)
         {
             HttpServerBase server = new Chat.Server();
             try
@@ -28,6 +40,7 @@ namespace WebSocketChat
             {
                 Console.WriteLine(e.ToString());
             }
+            return server;
         }
     }
 }
