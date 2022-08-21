@@ -26,7 +26,7 @@ namespace WebSocketChat.Chat
         }
         protected override Messager GetMessager(HttpRequest request, HttpStream baseStream)
         {
-            return new Connection(baseStream, baseStream.BaseSocket.LocalEndPoint, baseStream.BaseSocket.RemoteEndPoint);
+            return new Connection(baseStream, baseStream.LocalEndPoint, baseStream.RemoteEndPoint);
         }
     }
 }
